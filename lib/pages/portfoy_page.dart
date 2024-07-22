@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:project/constants/colors_constants.dart';
 import 'package:project/constants/db_constants.dart';
 import 'package:project/services/alert_service.dart';
 import 'package:project/services/firebase_service.dart';
@@ -24,9 +25,14 @@ class _PortfoyPageState extends State<PortfoyPage> {
     _targetPrice.clear();
   }
 
+  @override
+  initState() {
+    super.initState();
+  }
+
   void close() {
     clearTexts();
-    FirebaseService.exit();
+    _firebaseService.exit();
     context.goNamed('Login');
   }
 
@@ -37,13 +43,13 @@ class _PortfoyPageState extends State<PortfoyPage> {
   final _unitPrice = TextEditingController();
   final _targetPrice = TextEditingController();
   Widget build(BuildContext context) {
-    final currentUser = FirebaseService.currentUser;
+    final currentUser = _firebaseService.currentUser;
     final currentUserId = currentUser != null ? currentUser!.id : '';
     return Scaffold(
         appBar: AppBar(
           title: const Text('Portföy'),
           centerTitle: true,
-          backgroundColor: Colors.deepOrange,
+          backgroundColor: ColorConstants.generalColor,
           leading: IconButton(
               onPressed: () async {
                 _alertService.openModal(
@@ -128,7 +134,7 @@ class _PortfoyPageState extends State<PortfoyPage> {
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width,
-                  color: Colors.deepOrange,
+                  color: const Color(0xFFee403c),
                   child: Column(
                     children: [
                       Text(
@@ -173,7 +179,7 @@ class _PortfoyPageState extends State<PortfoyPage> {
                       top: 0, left: 15, right: 15, bottom: 15),
                   child: Text(title,
                       style: const TextStyle(
-                          color: Colors.deepOrange,
+                          color: ColorConstants.generalColor,
                           fontSize: 15,
                           fontWeight: FontWeight.bold)),
                 ),
@@ -283,8 +289,8 @@ class _PortfoyPageState extends State<PortfoyPage> {
               !isEdit
                   ? TextButton(
                       style: ButtonStyle(
-                          backgroundColor:
-                              WidgetStateProperty.all(Colors.deepOrange)),
+                          backgroundColor: WidgetStateProperty.all(
+                              ColorConstants.generalColor)),
                       onPressed: () {
                         if (_name.text.isEmpty ||
                             _quantity.text.isEmpty ||
@@ -305,8 +311,8 @@ class _PortfoyPageState extends State<PortfoyPage> {
                           style: TextStyle(color: Colors.white)))
                   : TextButton(
                       style: ButtonStyle(
-                          backgroundColor:
-                              WidgetStateProperty.all(Colors.deepOrange)),
+                          backgroundColor: WidgetStateProperty.all(
+                              ColorConstants.generalColor)),
                       onPressed: () {
                         if (_name.text.isEmpty ||
                             _quantity.text.isEmpty ||

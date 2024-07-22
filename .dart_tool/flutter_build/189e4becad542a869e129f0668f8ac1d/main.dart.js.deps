@@ -896,10 +896,6 @@ file:///C:/Users/Mustafa%20Furkan/AppData/Local/Pub/Cache/hosted/pub.dev/rive_co
 file:///C:/Users/Mustafa%20Furkan/AppData/Local/Pub/Cache/hosted/pub.dev/rive_common-0.4.9/lib/src/utilities/tops.dart
 file:///C:/Users/Mustafa%20Furkan/AppData/Local/Pub/Cache/hosted/pub.dev/rive_common-0.4.9/lib/src/utilities/utilities.dart
 file:///C:/Users/Mustafa%20Furkan/AppData/Local/Pub/Cache/hosted/pub.dev/rive_common-0.4.9/lib/utilities.dart
-file:///C:/Users/Mustafa%20Furkan/AppData/Local/Pub/Cache/hosted/pub.dev/shared_preferences-2.2.3/lib/shared_preferences.dart
-file:///C:/Users/Mustafa%20Furkan/AppData/Local/Pub/Cache/hosted/pub.dev/shared_preferences_platform_interface-2.4.0/lib/method_channel_shared_preferences.dart
-file:///C:/Users/Mustafa%20Furkan/AppData/Local/Pub/Cache/hosted/pub.dev/shared_preferences_platform_interface-2.4.0/lib/shared_preferences_platform_interface.dart
-file:///C:/Users/Mustafa%20Furkan/AppData/Local/Pub/Cache/hosted/pub.dev/shared_preferences_platform_interface-2.4.0/lib/types.dart
 file:///C:/Users/Mustafa%20Furkan/AppData/Local/Pub/Cache/hosted/pub.dev/source_span-1.10.0/lib/source_span.dart
 file:///C:/Users/Mustafa%20Furkan/AppData/Local/Pub/Cache/hosted/pub.dev/source_span-1.10.0/lib/src/charcode.dart
 file:///C:/Users/Mustafa%20Furkan/AppData/Local/Pub/Cache/hosted/pub.dev/source_span-1.10.0/lib/src/colors.dart
@@ -1830,6 +1826,7 @@ file:///C:/src/flutter/packages/flutter_web_plugins/lib/src/plugin_registry.dart
 file:///D:/flutter_project/borsa_takip/project/.dart_tool/flutter_build/189e4becad542a869e129f0668f8ac1d/app.dill
 file:///D:/flutter_project/borsa_takip/project/.dart_tool/flutter_build/189e4becad542a869e129f0668f8ac1d/main.dart
 file:///D:/flutter_project/borsa_takip/project/.dart_tool/flutter_build/189e4becad542a869e129f0668f8ac1d/web_plugin_registrant.dart
+file:///D:/flutter_project/borsa_takip/project/lib/constants/colors_constants.dart
 file:///D:/flutter_project/borsa_takip/project/lib/constants/db_constants.dart
 file:///D:/flutter_project/borsa_takip/project/lib/firebase_options.dart
 file:///D:/flutter_project/borsa_takip/project/lib/main.dart
@@ -1837,8 +1834,10 @@ file:///D:/flutter_project/borsa_takip/project/lib/pages/create_page.dart
 file:///D:/flutter_project/borsa_takip/project/lib/pages/login_page.dart
 file:///D:/flutter_project/borsa_takip/project/lib/pages/portfoy_page.dart
 file:///D:/flutter_project/borsa_takip/project/lib/pages/update_user_page.dart
+file:///D:/flutter_project/borsa_takip/project/lib/public_pages/footer.dart
 file:///D:/flutter_project/borsa_takip/project/lib/router.dart
 file:///D:/flutter_project/borsa_takip/project/lib/services/alert_service.dart
+file:///D:/flutter_project/borsa_takip/project/lib/services/database_service.dart
 file:///D:/flutter_project/borsa_takip/project/lib/services/firebase_service.dart
 org-dartlang-sdk:///dart-sdk/lib/_http/crypto.dart
 org-dartlang-sdk:///dart-sdk/lib/_http/embedder_config.dart

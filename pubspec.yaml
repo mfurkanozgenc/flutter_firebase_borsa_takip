@@ -15,13 +15,15 @@ dependencies:
   awesome_dialog:
   fluttertoast: ^8.0.9
   firebase_auth:
-  shared_preferences:
+  hive_flutter:
   go_router:
   
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
+  build_runner: 
+  hive_generator: 
 
 flutter:
   uses-material-design: true

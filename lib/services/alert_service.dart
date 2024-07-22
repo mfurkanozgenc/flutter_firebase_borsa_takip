@@ -24,4 +24,10 @@ class AlertService {
       btnOkOnPress: onOk,
     ).show();
   }
+
+  static void showToast(String message, BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(message, textAlign: TextAlign.center),
+    ));
+  }
 }

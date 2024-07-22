@@ -1,14 +1,16 @@
 import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:project/constants/db_constants.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class FirebaseService {
   late CollectionReference response;
   late CollectionReference userResponse;
-  static User? loginUser;
+  User? loginUser;
 
-  static final FirebaseService _instance = FirebaseService._internal();
+  FirebaseService._privateConstructor();
+
+  static final FirebaseService _instance =
+      FirebaseService._privateConstructor();
 
   factory FirebaseService(String collectionName) {
     _instance.response = FirebaseFirestore.instance.collection(collectionName);
@@ -16,8 +18,6 @@ class FirebaseService {
         FirebaseFirestore.instance.collection(DbConstants.UserTable);
     return _instance;
   }
-
-  FirebaseService._internal();
 
   Future<bool> add(String name, num unitPrice, num quantity, String userId,
       num targetPrice) async {
@@ -68,9 +68,6 @@ class FirebaseService {
 
   Future<String?> createUser(
       String userName, String password, String fullName) async {
-    final FirebaseFirestore firestore = FirebaseFirestore.instance;
-    final CollectionReference userResponse = firestore.collection('users');
-
     try {
       var querySnapshot =
           await userResponse.where('userName', isEqualTo: userName).get();
@@ -90,9 +87,6 @@ class FirebaseService {
   }
 
   Future<String> login(String userName, String password) async {
-    final FirebaseFirestore firestore = FirebaseFirestore.instance;
-    final CollectionReference userResponse = firestore.collection('users');
-
     try {
       var querySnapshot = await userResponse
           .where('userName', isEqualTo: userName)
@@ -102,7 +96,7 @@ class FirebaseService {
       if (querySnapshot.docs.isNotEmpty) {
         var userDoc = querySnapshot.docs.first;
         loginUser = User.fromFirestore(userDoc);
-        saveUserToPrefs(loginUser!);
+        // await saveUserToPrefs(loginUser!);
         return 'success';
       } else {
         return 'Kullanıcı Bulunamadı';
@@ -112,10 +106,7 @@ class FirebaseService {
     }
   }
 
-  static Future<String> updateUser(String userName, String fullName) async {
-    final FirebaseFirestore firestore = FirebaseFirestore.instance;
-    final CollectionReference userResponse = firestore.collection('users');
-
+  Future<String> updateUser(String userName, String fullName) async {
     try {
       var querySnapshot =
           await userResponse.where('userName', isEqualTo: userName).get();
@@ -136,34 +127,37 @@ class FirebaseService {
     }
   }
 
-  static User? get currentUser => loginUser;
+  User? get currentUser => loginUser;
 
-  static Future<void> exit() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.remove('user');
+  Future<void> exit() async {
+    // await _prefs?.remove('user');
     loginUser = null;
   }
 
-  static Future<void> saveUserToPrefs(User user) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String userJson = jsonEncode(user.toJson());
-    await prefs.setString('user', userJson);
-  }
+  // Future<void> saveUserToPrefs(User user) async {
+  //   print('Çalıştı2');
+  //   try {
+  //     String userJson = jsonEncode(user.toJson());
+  //     await _prefs?.setString('user', userJson);
+  //   } catch (e) {
+  //     print('HATA2 $e');
+  //   }
+  // }
 
-  static Future<User?> getUserFromPrefs() async {
-    print('Çalıştı');
-    try {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      String? userJson = prefs.getString('user');
-      if (userJson != null) {
-        Map<String, dynamic> userMap = jsonDecode(userJson);
-        return User.fromJson(userMap);
-      }
-      return null;
-    } catch (e) {
-      print('HATA1 $e');
-    }
-  }
+  // Future<User?> getUserFromPrefs() async {
+  //   print('Çalıştı');
+  //   try {
+  //     String? userJson = _prefs?.getString('user');
+  //     if (userJson != null) {
+  //       Map<String, dynamic> userMap = jsonDecode(userJson);
+  //       return User.fromJson(userMap);
+  //     }
+  //     return null;
+  //   } catch (e) {
+  //     print('HATA1 $e');
+  //     return null;
+  //   }
+  // }
 }
 
 class User {
