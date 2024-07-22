@@ -1,0 +1,38 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "borsa-takip-623c5",
+          "appId": "1:618856351521:android:fbf3ad3efc967595662060",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "borsa-takip-623c5",
+          "configurations": {
+            "android": "1:618856351521:android:fbf3ad3efc967595662060",
+            "ios": "1:618856351521:ios:9c4e5c421c546405662060",
+            "web": "1:618856351521:web:8595fe306fcab20e662060",
+            "windows": "1:618856351521:web:377e1ff7def30558662060"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

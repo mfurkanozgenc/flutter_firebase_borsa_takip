@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "618856351521",
+    "project_id": "borsa-takip-623c5",
+    "storage_bucket": "borsa-takip-623c5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:618856351521:android:fbf3ad3efc967595662060",
+        "android_client_info": {
+          "package_name": "com.borsatakip"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwoS37beEhnOQNFy0I0ZAvWXWxhl0NiEQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
