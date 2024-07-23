@@ -8,6 +8,7 @@ import 'package:project/constants/colors_constants.dart';
 import 'package:project/constants/db_constants.dart';
 import 'package:project/services/alert_service.dart';
 import 'package:project/services/firebase_service.dart';
+import 'package:project/services/localStorage_service.dart';
 
 class PortfoyPage extends StatefulWidget {
   const PortfoyPage({super.key});
@@ -27,12 +28,14 @@ class _PortfoyPageState extends State<PortfoyPage> {
 
   @override
   initState() {
+    getUserInfo();
     super.initState();
   }
 
   void close() {
     clearTexts();
     _firebaseService.exit();
+    _localStorageService.DeleteData('LoginInfo');
     context.goNamed('Login');
   }
 
@@ -42,6 +45,16 @@ class _PortfoyPageState extends State<PortfoyPage> {
   final _quantity = TextEditingController();
   final _unitPrice = TextEditingController();
   final _targetPrice = TextEditingController();
+  final _localStorageService = LocalStorageService();
+  Future<void> getUserInfo() async {
+    var result = await _localStorageService.refreshPage();
+    if (result != null) {
+      setState(() {
+        _firebaseService.loginUser = result;
+      });
+    }
+  }
+
   Widget build(BuildContext context) {
     final currentUser = _firebaseService.currentUser;
     final currentUserId = currentUser != null ? currentUser!.id : '';
@@ -169,20 +182,25 @@ class _PortfoyPageState extends State<PortfoyPage> {
       _targetPrice.text = model['targetPrice'].toString();
     }
     return showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Column(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                    top: 0, left: 15, right: 15, bottom: 15),
+                child: Text(title,
+                    style: const TextStyle(
+                        color: ColorConstants.generalColor,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold)),
+              ),
+            ],
+          ),
+          content: SingleChildScrollView(
+            child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                      top: 0, left: 15, right: 15, bottom: 15),
-                  child: Text(title,
-                      style: const TextStyle(
-                          color: ColorConstants.generalColor,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold)),
-                ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
@@ -274,67 +292,69 @@ class _PortfoyPageState extends State<PortfoyPage> {
                 ),
               ],
             ),
-            actions: [
-              TextButton(
-                  style: ButtonStyle(
-                      backgroundColor: WidgetStateProperty.all(Colors.grey)),
-                  onPressed: () {
-                    clearTexts();
-                    Navigator.pop(context);
-                  },
-                  child: const Text(
-                    'İptal',
-                    style: TextStyle(color: Colors.white),
-                  )),
-              !isEdit
-                  ? TextButton(
-                      style: ButtonStyle(
-                          backgroundColor: WidgetStateProperty.all(
-                              ColorConstants.generalColor)),
-                      onPressed: () {
-                        if (_name.text.isEmpty ||
-                            _quantity.text.isEmpty ||
-                            _unitPrice.text.isEmpty) {
-                          showToast(
-                              'Lütfen zorunlu alanları doldurunuz!', context);
-                          return;
-                        }
-                        _firebaseService.add(
-                            _name.text,
-                            num.parse(_unitPrice.text),
-                            num.parse(_quantity.text),
-                            userId,
-                            num.parse(_targetPrice.text));
-                        Navigator.pop(context);
-                      },
-                      child: const Text('Ekle',
-                          style: TextStyle(color: Colors.white)))
-                  : TextButton(
-                      style: ButtonStyle(
-                          backgroundColor: WidgetStateProperty.all(
-                              ColorConstants.generalColor)),
-                      onPressed: () {
-                        if (_name.text.isEmpty ||
-                            _quantity.text.isEmpty ||
-                            _unitPrice.text.isEmpty) {
-                          showToast(
-                              'Lütfen zorunlu alanları doldurunuz!', context);
-                          return;
-                        }
-                        _firebaseService.update(
-                            id,
-                            _name.text,
-                            num.parse(_unitPrice.text),
-                            num.parse(_quantity.text),
-                            userId,
-                            num.parse(_targetPrice.text));
-                        Navigator.pop(context);
-                      },
-                      child: const Text('Güncelle',
-                          style: TextStyle(color: Colors.white))),
-            ],
-          );
-        });
+          ),
+          actions: [
+            TextButton(
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.grey)),
+                onPressed: () {
+                  clearTexts();
+                  Navigator.pop(context);
+                },
+                child: const Text(
+                  'İptal',
+                  style: TextStyle(color: Colors.white),
+                )),
+            !isEdit
+                ? TextButton(
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(
+                            ColorConstants.generalColor)),
+                    onPressed: () {
+                      if (_name.text.isEmpty ||
+                          _quantity.text.isEmpty ||
+                          _unitPrice.text.isEmpty) {
+                        showToast(
+                            'Lütfen zorunlu alanları doldurunuz!', context);
+                        return;
+                      }
+                      _firebaseService.add(
+                          _name.text,
+                          num.parse(_unitPrice.text),
+                          num.parse(_quantity.text),
+                          userId,
+                          num.parse(_targetPrice.text));
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Ekle',
+                        style: TextStyle(color: Colors.white)))
+                : TextButton(
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(
+                            ColorConstants.generalColor)),
+                    onPressed: () {
+                      if (_name.text.isEmpty ||
+                          _quantity.text.isEmpty ||
+                          _unitPrice.text.isEmpty) {
+                        showToast(
+                            'Lütfen zorunlu alanları doldurunuz!', context);
+                        return;
+                      }
+                      _firebaseService.update(
+                          id,
+                          _name.text,
+                          num.parse(_unitPrice.text),
+                          num.parse(_quantity.text),
+                          userId,
+                          num.parse(_targetPrice.text));
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Güncelle',
+                        style: TextStyle(color: Colors.white))),
+          ],
+        );
+      },
+    ).then((value) => null); // This ensures a non-null return value
   }
 }
 

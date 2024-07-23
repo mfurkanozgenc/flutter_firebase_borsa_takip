@@ -1,11 +1,13 @@
 import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:project/constants/db_constants.dart';
+import 'package:project/services/localStorage_service.dart';
 
 class FirebaseService {
   late CollectionReference response;
   late CollectionReference userResponse;
   User? loginUser;
+  static late LocalStorageService localStorageService;
 
   FirebaseService._privateConstructor();
 
@@ -16,6 +18,7 @@ class FirebaseService {
     _instance.response = FirebaseFirestore.instance.collection(collectionName);
     _instance.userResponse =
         FirebaseFirestore.instance.collection(DbConstants.UserTable);
+    localStorageService = LocalStorageService();
     return _instance;
   }
 
@@ -96,7 +99,8 @@ class FirebaseService {
       if (querySnapshot.docs.isNotEmpty) {
         var userDoc = querySnapshot.docs.first;
         loginUser = User.fromFirestore(userDoc);
-        // await saveUserToPrefs(loginUser!);
+        String userJson = jsonEncode(loginUser!.toJson());
+        localStorageService.WriteData('LoginInfo', userJson!);
         return 'success';
       } else {
         return 'Kullanıcı Bulunamadı';
@@ -124,6 +128,28 @@ class FirebaseService {
       }
     } catch (error) {
       return 'Update User failed: $error';
+    }
+  }
+
+  Future<String> updateUserPassword(String newPassword) async {
+    try {
+      var querySnapshot = await userResponse
+          .where('userName', isEqualTo: currentUser!.userName)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty &&
+          querySnapshot.docs.first.id != currentUser!.id) {
+        return 'Bu Kullanıcı Adına Ait Kayıt Bulunmaktadır';
+      } else {
+        userResponse.doc(currentUser!.id).update({
+          'userName': currentUser!.userName,
+          'password': newPassword,
+          'fullName': currentUser!.fullName,
+        });
+        return 'success';
+      }
+    } catch (error) {
+      return 'Update User Password failed: $error';
     }
   }
 

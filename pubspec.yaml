@@ -16,6 +16,7 @@ dependencies:
   fluttertoast: ^8.0.9
   firebase_auth:
   hive_flutter:
+  hive:
   go_router:
   
 dev_dependencies:

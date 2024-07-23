@@ -82,13 +82,21 @@ class _CreatePageState extends State<CreatePage> {
                               label: Text('Ad-Soyad *'),
                               labelStyle: TextStyle(color: Colors.black),
                               enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
                                   borderSide: BorderSide(color: Colors.black)),
                               focusedBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
                                   borderSide: BorderSide(color: Colors.grey)),
                               errorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
                                   borderSide:
                                       BorderSide(color: Color(0xFFee403c))),
                               focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
                                   borderSide:
                                       BorderSide(color: Color(0xFFee403c)))),
                         ),
@@ -106,13 +114,21 @@ class _CreatePageState extends State<CreatePage> {
                               label: Text('Kullanıcı Adı *'),
                               labelStyle: TextStyle(color: Colors.black),
                               enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
                                   borderSide: BorderSide(color: Colors.black)),
                               focusedBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
                                   borderSide: BorderSide(color: Colors.grey)),
                               errorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
                                   borderSide:
                                       BorderSide(color: Color(0xFFee403c))),
                               focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
                                   borderSide:
                                       BorderSide(color: Color(0xFFee403c)))),
                         ),
@@ -130,13 +146,21 @@ class _CreatePageState extends State<CreatePage> {
                               label: Text('Şifre *'),
                               labelStyle: TextStyle(color: Colors.black),
                               enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
                                   borderSide: BorderSide(color: Colors.black)),
                               focusedBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
                                   borderSide: BorderSide(color: Colors.grey)),
                               errorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
                                   borderSide:
                                       BorderSide(color: Color(0xFFee403c))),
                               focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
                                   borderSide:
                                       BorderSide(color: Color(0xFFee403c)))),
                         ),
@@ -146,6 +170,9 @@ class _CreatePageState extends State<CreatePage> {
                         child: ElevatedButton(
                           onPressed: _create,
                           style: ElevatedButton.styleFrom(
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
                               backgroundColor: const Color(0xFFee403c),
                               minimumSize: Size(width * .8, 50)),
                           child: const Text('Kayıt Ol'),

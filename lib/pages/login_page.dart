@@ -9,6 +9,7 @@ import 'package:project/public_pages/footer.dart';
 import 'package:project/services/alert_service.dart';
 import 'package:project/services/database_service.dart';
 import 'package:project/services/firebase_service.dart';
+import 'package:project/services/localStorage_service.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -22,6 +23,7 @@ class _LoginPageState extends State<LoginPage> {
   final _password = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   final _db = DatabaseService();
+  final _localStorageService = LocalStorageService();
   final _firebaseService = FirebaseService(DbConstants.UserTable);
   var isPasswordVisibility = true;
 
@@ -31,6 +33,7 @@ class _LoginPageState extends State<LoginPage> {
       if (result.isNotEmpty) {
         if (result == 'success') {
           context.goNamed('Portfoy');
+          _localStorageService.ReadData('LoginInfo');
         } else {
           AlertService.showToast(result, context);
         }
@@ -84,13 +87,22 @@ class _LoginPageState extends State<LoginPage> {
                               label: Text('Kullanıcı Adı *'),
                               labelStyle: TextStyle(color: Colors.black),
                               enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.black)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                                borderSide: BorderSide(color: Colors.black),
+                              ),
                               focusedBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
                                   borderSide: BorderSide(color: Colors.grey)),
                               errorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
                                   borderSide: BorderSide(
                                       color: ColorConstants.generalColor)),
                               focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
                                   borderSide: BorderSide(
                                       color: ColorConstants.generalColor))),
                         ),
@@ -124,13 +136,21 @@ class _LoginPageState extends State<LoginPage> {
                               label: const Text('Şifre *'),
                               labelStyle: const TextStyle(color: Colors.black),
                               enabledBorder: const OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
                                   borderSide: BorderSide(color: Colors.black)),
                               focusedBorder: const OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
                                   borderSide: BorderSide(color: Colors.grey)),
                               errorBorder: const OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
                                   borderSide: BorderSide(
                                       color: ColorConstants.generalColor)),
                               focusedErrorBorder: const OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
                                   borderSide: BorderSide(
                                       color: ColorConstants.generalColor))),
                         ),
@@ -140,6 +160,9 @@ class _LoginPageState extends State<LoginPage> {
                         child: ElevatedButton(
                           onPressed: _login,
                           style: ElevatedButton.styleFrom(
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
                               backgroundColor: ColorConstants.generalColor,
                               minimumSize: Size(width * .8, 50)),
                           child: const Text('Giriş Yap'),

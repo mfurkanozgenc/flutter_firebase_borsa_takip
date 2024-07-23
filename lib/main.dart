@@ -1,10 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:project/firebase_options.dart';
 import 'package:project/router.dart';
 
 void main() async {
   try {
+    await Hive.initFlutter();
+    var box = await Hive.openBox('myBox');
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform);
