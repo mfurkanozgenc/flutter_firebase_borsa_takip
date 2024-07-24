@@ -26,16 +26,40 @@ class _LoginPageState extends State<LoginPage> {
   final _localStorageService = LocalStorageService();
   final _firebaseService = FirebaseService(DbConstants.UserTable);
   var isPasswordVisibility = true;
-
+  bool isChecked = false;
   Future<void> _login() async {
     if (_formKey.currentState!.validate()) {
       var result = await _firebaseService.login(_userName.text, _password.text);
       if (result.isNotEmpty) {
         if (result == 'success') {
+          if (isChecked) {
+            _localStorageService.WriteData('isChecked', 'true');
+          } else {
+            _localStorageService.DeleteData('isChecked');
+          }
           context.goNamed('Portfoy');
-          _localStorageService.ReadData('LoginInfo');
         } else {
           AlertService.showToast(result, context);
+        }
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    getUserData();
+    super.initState();
+  }
+
+  void getUserData() async {
+    var isCheckedString = _localStorageService.ReadData('isChecked');
+    if (isCheckedString.isNotEmpty) {
+      isChecked = bool.tryParse(isCheckedString) ?? false;
+      if (isChecked) {
+        var result = await _localStorageService.refreshPage();
+        if (result != null) {
+          _userName.text = result.userName;
+          _password.text = result.password;
         }
       }
     }
@@ -154,6 +178,58 @@ class _LoginPageState extends State<LoginPage> {
                                   borderSide: BorderSide(
                                       color: ColorConstants.generalColor))),
                         ),
+                      ),
+                      Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 5),
+                            child: Transform.scale(
+                              scale: 1.2,
+                              child: Checkbox(
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5))),
+                                value: isChecked,
+                                activeColor: ColorConstants.generalColor,
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    isChecked = value!;
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                          TextButton(
+                            style: TextButton.styleFrom(
+                              foregroundColor: Colors.transparent,
+                              backgroundColor: isChecked
+                                  ? Colors.transparent
+                                  : Colors.transparent,
+                            ).copyWith(
+                              overlayColor:
+                                  WidgetStateProperty.resolveWith<Color?>(
+                                (Set<WidgetState> states) {
+                                  if (states.contains(WidgetState.hovered)) {
+                                    return Colors.transparent.withOpacity(0.1);
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                isChecked = !isChecked;
+                              });
+                            },
+                            child: const Text(
+                              'Beni Hatırla',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                          )
+                        ],
                       ),
                       Padding(
                         padding: const EdgeInsets.all(20),

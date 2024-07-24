@@ -22,7 +22,7 @@ class footer extends StatelessWidget {
           Column(
             children: [
               Text(
-                'V240723',
+                'V240724',
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 10,

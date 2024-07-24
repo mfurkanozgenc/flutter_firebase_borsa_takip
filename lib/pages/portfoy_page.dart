@@ -35,8 +35,12 @@ class _PortfoyPageState extends State<PortfoyPage> {
   void close() {
     clearTexts();
     _firebaseService.exit();
-    _localStorageService.DeleteData('LoginInfo');
-    context.goNamed('Login');
+    var isCheckedString = _localStorageService.ReadData('isChecked');
+    var isChecked = bool.tryParse(isCheckedString) ?? false;
+    if (!isChecked) {
+      _localStorageService.DeleteData('LoginInfo');
+    }
+    context.go('/loginPage');
   }
 
   final _alertService = AlertService();
@@ -46,6 +50,7 @@ class _PortfoyPageState extends State<PortfoyPage> {
   final _unitPrice = TextEditingController();
   final _targetPrice = TextEditingController();
   final _localStorageService = LocalStorageService();
+  final _formKey = GlobalKey<FormState>();
   Future<void> getUserInfo() async {
     var result = await _localStorageService.refreshPage();
     if (result != null) {
@@ -82,6 +87,12 @@ class _PortfoyPageState extends State<PortfoyPage> {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  TextButton(
+                      onPressed: () {},
+                      child: const Text(
+                        'Hedefler',
+                        style: TextStyle(color: Colors.white, fontSize: 15),
+                      )),
                   IconButton(
                       onPressed: () {
                         clearTexts();
@@ -193,110 +204,174 @@ class _PortfoyPageState extends State<PortfoyPage> {
                 child: Text(title,
                     style: const TextStyle(
                         color: ColorConstants.generalColor,
-                        fontSize: 15,
+                        fontSize: 20,
                         fontWeight: FontWeight.bold)),
               ),
             ],
           ),
           content: SingleChildScrollView(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextField(
-                    controller: _name,
-                    decoration: const InputDecoration(
-                        label: Text('İsim *'),
-                        labelStyle: TextStyle(color: Colors.black),
-                        border: OutlineInputBorder(),
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey)),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.deepOrange))),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Lütfen İsim Giriniz';
+                        }
+                      },
+                      controller: _name,
+                      decoration: const InputDecoration(
+                          label: Text('İsim *'),
+                          labelStyle: TextStyle(color: Colors.black),
+                          border: OutlineInputBorder(),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              borderSide: BorderSide(color: Colors.grey)),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              borderSide: BorderSide(color: Colors.black)),
+                          errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: ColorConstants.generalColor),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)))),
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextField(
-                    controller: _quantity,
-                    keyboardType:
-                        const TextInputType.numberWithOptions(decimal: true),
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.allow(
-                          RegExp(r'[0-9]+[,.]{0,1}[0-9]*')),
-                      TextInputFormatter.withFunction(
-                        (oldValue, newValue) => newValue.copyWith(
-                          text: newValue.text.replaceAll(',', '.'),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Lütfen Adet Giriniz';
+                        }
+                      },
+                      controller: _quantity,
+                      keyboardType:
+                          const TextInputType.numberWithOptions(decimal: true),
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.allow(
+                            RegExp(r'[0-9]+[,.]{0,1}[0-9]*')),
+                        TextInputFormatter.withFunction(
+                          (oldValue, newValue) => newValue.copyWith(
+                            text: newValue.text.replaceAll(',', '.'),
+                          ),
                         ),
-                      ),
-                    ],
-                    decoration: const InputDecoration(
-                        label: Text('Adet *'),
-                        labelStyle: TextStyle(color: Colors.black),
-                        border: OutlineInputBorder(),
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey)),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.deepOrange))),
+                      ],
+                      decoration: const InputDecoration(
+                          label: Text('Adet *'),
+                          labelStyle: TextStyle(color: Colors.black),
+                          border: OutlineInputBorder(),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              borderSide: BorderSide(color: Colors.grey)),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              borderSide: BorderSide(color: Colors.black)),
+                          errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: ColorConstants.generalColor),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)))),
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextField(
-                    controller: _unitPrice,
-                    keyboardType:
-                        const TextInputType.numberWithOptions(decimal: true),
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.allow(
-                          RegExp(r'[0-9]+[,.]{0,1}[0-9]*')),
-                      TextInputFormatter.withFunction(
-                        (oldValue, newValue) => newValue.copyWith(
-                          text: newValue.text.replaceAll(',', '.'),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Lütfen Birim Fiyat Giriniz';
+                        }
+                      },
+                      controller: _unitPrice,
+                      keyboardType:
+                          const TextInputType.numberWithOptions(decimal: true),
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.allow(
+                            RegExp(r'[0-9]+[,.]{0,1}[0-9]*')),
+                        TextInputFormatter.withFunction(
+                          (oldValue, newValue) => newValue.copyWith(
+                            text: newValue.text.replaceAll(',', '.'),
+                          ),
                         ),
-                      ),
-                    ],
-                    decoration: const InputDecoration(
-                        label: Text('Birim Fiyat *'),
-                        labelStyle: TextStyle(color: Colors.black),
-                        border: OutlineInputBorder(),
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey)),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.deepOrange))),
+                      ],
+                      decoration: const InputDecoration(
+                          label: Text('Birim Fiyat *'),
+                          labelStyle: TextStyle(color: Colors.black),
+                          border: OutlineInputBorder(),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              borderSide: BorderSide(color: Colors.grey)),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              borderSide: BorderSide(color: Colors.black)),
+                          errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: ColorConstants.generalColor),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)))),
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextField(
-                    controller: _targetPrice,
-                    keyboardType:
-                        const TextInputType.numberWithOptions(decimal: true),
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.allow(
-                          RegExp(r'[0-9]+[,.]{0,1}[0-9]*')),
-                      TextInputFormatter.withFunction(
-                        (oldValue, newValue) => newValue.copyWith(
-                          text: newValue.text.replaceAll(',', '.'),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Lütfen Hedef Fiyat Giriniz';
+                        }
+                      },
+                      controller: _targetPrice,
+                      keyboardType:
+                          const TextInputType.numberWithOptions(decimal: true),
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.allow(
+                            RegExp(r'[0-9]+[,.]{0,1}[0-9]*')),
+                        TextInputFormatter.withFunction(
+                          (oldValue, newValue) => newValue.copyWith(
+                            text: newValue.text.replaceAll(',', '.'),
+                          ),
                         ),
-                      ),
-                    ],
-                    decoration: const InputDecoration(
-                        label: Text('Hedef Fiyat *'),
-                        labelStyle: TextStyle(color: Colors.black),
-                        border: OutlineInputBorder(),
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey)),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.deepOrange))),
+                      ],
+                      decoration: const InputDecoration(
+                          label: Text('Hedef Fiyat *'),
+                          labelStyle: TextStyle(color: Colors.black),
+                          border: OutlineInputBorder(),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              borderSide: BorderSide(color: Colors.grey)),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              borderSide: BorderSide(color: Colors.black)),
+                          errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: ColorConstants.generalColor),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)))),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
           actions: [
             TextButton(
                 style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.grey)),
+                  backgroundColor: WidgetStateProperty.all(Colors.grey),
+                  minimumSize:
+                      WidgetStateProperty.all<Size>(const Size(80, 40)),
+                  maximumSize:
+                      WidgetStateProperty.all<Size>(const Size(80, 40)),
+                ),
                 onPressed: () {
                   clearTexts();
                   Navigator.pop(context);
@@ -308,46 +383,45 @@ class _PortfoyPageState extends State<PortfoyPage> {
             !isEdit
                 ? TextButton(
                     style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
+                        minimumSize:
+                            WidgetStateProperty.all<Size>(const Size(80, 40)),
+                        maximumSize:
+                            WidgetStateProperty.all<Size>(const Size(80, 40)),
+                        backgroundColor: WidgetStateProperty.all(
                             ColorConstants.generalColor)),
-                    onPressed: () {
-                      if (_name.text.isEmpty ||
-                          _quantity.text.isEmpty ||
-                          _unitPrice.text.isEmpty) {
-                        showToast(
-                            'Lütfen zorunlu alanları doldurunuz!', context);
-                        return;
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        await _firebaseService.add(
+                            _name.text,
+                            num.parse(_unitPrice.text),
+                            num.parse(_quantity.text),
+                            userId,
+                            num.parse(_targetPrice.text));
+                        Navigator.pop(context);
                       }
-                      _firebaseService.add(
-                          _name.text,
-                          num.parse(_unitPrice.text),
-                          num.parse(_quantity.text),
-                          userId,
-                          num.parse(_targetPrice.text));
-                      Navigator.pop(context);
                     },
                     child: const Text('Ekle',
                         style: TextStyle(color: Colors.white)))
                 : TextButton(
                     style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                            ColorConstants.generalColor)),
+                      backgroundColor:
+                          WidgetStateProperty.all(ColorConstants.generalColor),
+                      minimumSize:
+                          WidgetStateProperty.all<Size>(const Size(80, 40)),
+                      maximumSize:
+                          WidgetStateProperty.all<Size>(const Size(80, 40)),
+                    ),
                     onPressed: () {
-                      if (_name.text.isEmpty ||
-                          _quantity.text.isEmpty ||
-                          _unitPrice.text.isEmpty) {
-                        showToast(
-                            'Lütfen zorunlu alanları doldurunuz!', context);
-                        return;
+                      if (_formKey.currentState!.validate()) {
+                        _firebaseService.update(
+                            id,
+                            _name.text,
+                            num.parse(_unitPrice.text),
+                            num.parse(_quantity.text),
+                            userId,
+                            num.parse(_targetPrice.text));
+                        Navigator.pop(context);
                       }
-                      _firebaseService.update(
-                          id,
-                          _name.text,
-                          num.parse(_unitPrice.text),
-                          num.parse(_quantity.text),
-                          userId,
-                          num.parse(_targetPrice.text));
-                      Navigator.pop(context);
                     },
                     child: const Text('Güncelle',
                         style: TextStyle(color: Colors.white))),
@@ -444,7 +518,7 @@ class _SampleCard extends StatelessWidget {
                                 context,
                                 () {},
                                 () => _firebaseService.delete(id),
-                                DialogType.warning,
+                                DialogType.error,
                                 'Dikkat !',
                                 'Seçili Hisse Silinecektir.Onaylıyor Musunuz ?',
                                 'İptal',

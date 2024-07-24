@@ -44,7 +44,7 @@ class _UpdateUserPageState extends State<UpdateUserPage> {
                 'Bilgileriniz Güncellendi.Lütfen Tekrar Giriş Yapınız',
                 context);
             _firebaseService.exit();
-            context.goNamed('Login');
+            context.go('/loginPage');
           } else {
             AlertService.showToast('Bilgileriniz Güncellendi.', context);
             if (_firebaseService.loginUser != null) {
@@ -80,7 +80,7 @@ class _UpdateUserPageState extends State<UpdateUserPage> {
             color: ColorConstants.generalColor,
           ),
           onPressed: () {
-            context.goNamed('Portfoy');
+            context.go('/portfoyPage');
           },
         ),
         title: const Text(
@@ -336,7 +336,12 @@ class _UpdateUserPageState extends State<UpdateUserPage> {
                       Navigator.of(context).pop();
                       context.go('Login');
                       _firebaseService.exit();
-                      _localStorageService.DeleteData('LoginInfo');
+                      var isCheckedString =
+                          _localStorageService.ReadData('isChecked');
+                      var isChecked = bool.tryParse(isCheckedString) ?? false;
+                      if (!isChecked) {
+                        _localStorageService.DeleteData('LoginInfo');
+                      }
                     } else {
                       AlertService.showToast(result, context);
                     }

@@ -18,7 +18,11 @@ class LocalStorageService {
   }
 
   String ReadData(String key) {
-    return _myBox.get(key);
+    try {
+      return _myBox.get(key);
+    } catch (e) {
+      return '';
+    }
   }
 
   void DeleteData(String key) {

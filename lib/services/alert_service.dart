@@ -12,17 +12,18 @@ class AlertService {
       String btnButtonText,
       String btnOkText) {
     AwesomeDialog(
-      context: context,
-      dialogType: dialogType,
-      animType: AnimType.topSlide,
-      showCloseIcon: false,
-      title: title,
-      desc: desc,
-      btnCancelText: btnButtonText,
-      btnOkText: btnOkText,
-      btnCancelOnPress: onCancel,
-      btnOkOnPress: onOk,
-    ).show();
+            context: context,
+            dialogType: dialogType,
+            animType: AnimType.topSlide,
+            showCloseIcon: false,
+            title: title,
+            desc: desc,
+            btnCancelText: btnButtonText,
+            btnOkText: btnOkText,
+            btnCancelOnPress: onCancel,
+            btnOkOnPress: onOk,
+            headerAnimationLoop: true)
+        .show();
   }
 
   static void showToast(String message, BuildContext context) {
