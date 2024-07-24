@@ -6,6 +6,7 @@ import 'package:project/services/localStorage_service.dart';
 class FirebaseService {
   late CollectionReference response;
   late CollectionReference userResponse;
+  late CollectionReference targetResponse;
   User? loginUser;
   static late LocalStorageService localStorageService;
 
@@ -18,6 +19,8 @@ class FirebaseService {
     _instance.response = FirebaseFirestore.instance.collection(collectionName);
     _instance.userResponse =
         FirebaseFirestore.instance.collection(DbConstants.UserTable);
+    _instance.targetResponse =
+        FirebaseFirestore.instance.collection(DbConstants.TargetTable);
     localStorageService = LocalStorageService();
     return _instance;
   }
@@ -156,34 +159,48 @@ class FirebaseService {
   User? get currentUser => loginUser;
 
   Future<void> exit() async {
-    // await _prefs?.remove('user');
     loginUser = null;
   }
 
-  // Future<void> saveUserToPrefs(User user) async {
-  //   print('Çalıştı2');
-  //   try {
-  //     String userJson = jsonEncode(user.toJson());
-  //     await _prefs?.setString('user', userJson);
-  //   } catch (e) {
-  //     print('HATA2 $e');
-  //   }
-  // }
+  Future<String?> createTarget(String target, String targetTime) async {
+    try {
+      await targetResponse.add({
+        'name': target,
+        'note': targetTime,
+        'userId': currentUser!.id,
+        'status': false
+      });
+      return 'success';
+    } catch (error) {
+      return 'Target creation failed: $error';
+    }
+  }
 
-  // Future<User?> getUserFromPrefs() async {
-  //   print('Çalıştı');
-  //   try {
-  //     String? userJson = _prefs?.getString('user');
-  //     if (userJson != null) {
-  //       Map<String, dynamic> userMap = jsonDecode(userJson);
-  //       return User.fromJson(userMap);
-  //     }
-  //     return null;
-  //   } catch (e) {
-  //     print('HATA1 $e');
-  //     return null;
-  //   }
-  // }
+  Future<String?> updateTargetStatus(
+      DocumentSnapshot<Object?> data, bool status) async {
+    try {
+      targetResponse.doc(data.id).update({
+        'name': data['name'],
+        'note': data['note'],
+        'userId': data['userId'],
+        'status': status
+      });
+      return 'success';
+    } catch (error) {
+      return 'Target creation failed: $error';
+    }
+  }
+
+  Future<bool> deleteTarget(String id) async {
+    try {
+      await targetResponse.doc(id).delete();
+      print('Silme İşlemi Başarılı');
+      return true;
+    } catch (error) {
+      print('Silme İşlemi Başarısız : $error');
+      return false;
+    }
+  }
 }
 
 class User {

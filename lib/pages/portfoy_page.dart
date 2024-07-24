@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:project/constants/colors_constants.dart';
 import 'package:project/constants/db_constants.dart';
+import 'package:project/public_pages/navbar.dart';
 import 'package:project/services/alert_service.dart';
 import 'package:project/services/firebase_service.dart';
 import 'package:project/services/localStorage_service.dart';
@@ -32,17 +33,6 @@ class _PortfoyPageState extends State<PortfoyPage> {
     super.initState();
   }
 
-  void close() {
-    clearTexts();
-    _firebaseService.exit();
-    var isCheckedString = _localStorageService.ReadData('isChecked');
-    var isChecked = bool.tryParse(isCheckedString) ?? false;
-    if (!isChecked) {
-      _localStorageService.DeleteData('LoginInfo');
-    }
-    context.go('/loginPage');
-  }
-
   final _alertService = AlertService();
   final _firebaseService = FirebaseService(DbConstants.portfoyTable);
   final _name = TextEditingController();
@@ -64,35 +54,17 @@ class _PortfoyPageState extends State<PortfoyPage> {
     final currentUser = _firebaseService.currentUser;
     final currentUserId = currentUser != null ? currentUser!.id : '';
     return Scaffold(
+        drawer: const Navbar(),
         appBar: AppBar(
           title: const Text('Portföy'),
           centerTitle: true,
           backgroundColor: ColorConstants.generalColor,
-          leading: IconButton(
-              onPressed: () async {
-                _alertService.openModal(
-                    context,
-                    () {},
-                    () => close(),
-                    DialogType.warning,
-                    'Dikkat !',
-                    'Çıkış Yapmak İstediğinize Emin Misiniz ?',
-                    'İptal',
-                    'Çıkış Yap');
-              },
-              icon: const Icon(Icons.arrow_back)),
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 20),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  TextButton(
-                      onPressed: () {},
-                      child: const Text(
-                        'Hedefler',
-                        style: TextStyle(color: Colors.white, fontSize: 15),
-                      )),
                   IconButton(
                       onPressed: () {
                         clearTexts();
@@ -100,11 +72,6 @@ class _PortfoyPageState extends State<PortfoyPage> {
                             null, currentUserId);
                       },
                       icon: const Icon(Icons.add)),
-                  IconButton(
-                      onPressed: () async {
-                        context.goNamed('UpdateUser');
-                      },
-                      icon: const Icon(Icons.person_2_sharp)),
                 ],
               ),
             )

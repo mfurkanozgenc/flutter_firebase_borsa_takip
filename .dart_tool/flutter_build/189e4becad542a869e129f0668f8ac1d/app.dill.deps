@@ -1902,8 +1902,10 @@ file:///D:/flutter_project/borsa_takip/project/lib/main.dart
 file:///D:/flutter_project/borsa_takip/project/lib/pages/create_page.dart
 file:///D:/flutter_project/borsa_takip/project/lib/pages/login_page.dart
 file:///D:/flutter_project/borsa_takip/project/lib/pages/portfoy_page.dart
+file:///D:/flutter_project/borsa_takip/project/lib/pages/target_page.dart
 file:///D:/flutter_project/borsa_takip/project/lib/pages/update_user_page.dart
 file:///D:/flutter_project/borsa_takip/project/lib/public_pages/footer.dart
+file:///D:/flutter_project/borsa_takip/project/lib/public_pages/navbar.dart
 file:///D:/flutter_project/borsa_takip/project/lib/router.dart
 file:///D:/flutter_project/borsa_takip/project/lib/services/alert_service.dart
 file:///D:/flutter_project/borsa_takip/project/lib/services/database_service.dart
