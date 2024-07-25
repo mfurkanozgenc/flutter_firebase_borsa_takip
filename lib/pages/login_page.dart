@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:project/constants/colors_constants.dart';
 import 'package:project/constants/db_constants.dart';
 import 'package:project/pages/create_page.dart';
+import 'package:project/public_pages/customAppBar.dart';
 import 'package:project/public_pages/footer.dart';
 import 'package:project/services/alert_service.dart';
 import 'package:project/services/database_service.dart';
@@ -70,6 +71,7 @@ class _LoginPageState extends State<LoginPage> {
     var width = MediaQuery.of(context).size.width;
     var heigth = MediaQuery.of(context).size.height;
     return Scaffold(
+      appBar: CustomAppBar(title: 'Deneme', onBackPressed: () {}),
       body: Column(
         children: [
           Container(
