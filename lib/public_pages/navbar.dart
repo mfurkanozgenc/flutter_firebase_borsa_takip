@@ -23,8 +23,9 @@ class _NavbarState extends State<Navbar> {
   Widget build(BuildContext context) {
     return Drawer(
       shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-              topRight: Radius.circular(20), bottomRight: Radius.circular(1))),
+        borderRadius: BorderRadius.only(
+            topRight: Radius.circular(20), bottomRight: Radius.circular(20)),
+      ),
       child: Column(
         children: [
           Expanded(

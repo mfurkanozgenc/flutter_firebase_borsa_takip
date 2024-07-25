@@ -81,6 +81,7 @@ class _PortfoyPageState extends State<PortfoyPage> {
           stream: FirebaseFirestore.instance
               .collection(DbConstants.portfoyTable)
               .where('userId', isEqualTo: currentUserId)
+              .orderBy('date')
               .snapshots(),
           builder: (context, snapshots) {
             if (!snapshots.hasData) {
@@ -386,6 +387,10 @@ class _PortfoyPageState extends State<PortfoyPage> {
                           WidgetStateProperty.all<Size>(const Size(80, 40)),
                     ),
                     onPressed: () {
+                      int date = 0;
+                      if (model!['date'].toString().isNotEmpty) {
+                        date = model['date'];
+                      }
                       if (_formKey.currentState!.validate()) {
                         _firebaseService.update(
                             id,
@@ -393,7 +398,8 @@ class _PortfoyPageState extends State<PortfoyPage> {
                             num.parse(_unitPrice.text),
                             num.parse(_quantity.text),
                             userId,
-                            num.parse(_targetPrice.text));
+                            num.parse(_targetPrice.text),
+                            date);
                         Navigator.pop(context);
                       }
                     },

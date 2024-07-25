@@ -8,6 +8,7 @@ import 'package:project/pages/update_user_page.dart';
 final GoRouter router = GoRouter(
   routes: [
     GoRoute(
+      
       path: '/loginPage',
       name: 'Login',
       builder: (context, state) => const LoginPage(),

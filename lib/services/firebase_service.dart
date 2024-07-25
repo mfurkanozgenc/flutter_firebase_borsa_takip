@@ -33,7 +33,8 @@ class FirebaseService {
         'quantity': quantity,
         'unitPrice': unitPrice,
         'targetPrice': targetPrice,
-        'userId': userId
+        'userId': userId,
+        'date': DateTime.now().microsecondsSinceEpoch
       });
       print('Kayıt Ekleme Başarılı');
       return true;
@@ -44,14 +45,15 @@ class FirebaseService {
   }
 
   Future<bool> update(String id, String name, num unitPrice, num quantity,
-      String userId, num targetPrice) async {
+      String userId, num targetPrice, int date) async {
     try {
       await response.doc(id).update({
         'name': name,
         'quantity': quantity,
         'unitPrice': unitPrice,
         'targetPrice': targetPrice,
-        'userId': userId
+        'userId': userId,
+        'date': date
       });
       print('Güncelleme İşlemi Başarılı');
       return true;

@@ -23,6 +23,7 @@ class _TargetPageState extends State<TargetPage> {
   final _note = TextEditingController();
   final _localStorageService = LocalStorageService();
   final _formKey = GlobalKey<FormState>();
+  late Future<QuerySnapshot> targetsFuture;
   Future<void> getUserInfo() async {
     var result = await _localStorageService.refreshPage();
     if (result != null) {
@@ -126,6 +127,8 @@ class _TargetPageState extends State<TargetPage> {
                                 child: Transform.scale(
                                   scale: 1.2,
                                   child: Checkbox(
+                                    fillColor: WidgetStateProperty.all<Color>(
+                                        Colors.white),
                                     shape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(5))),
@@ -173,11 +176,11 @@ class _TargetPageState extends State<TargetPage> {
                                 ),
                               ),
                               Padding(
-                                  padding: const EdgeInsets.only(right: 5),
+                                  padding: const EdgeInsets.only(right: 10),
                                   child: IconButton(
                                     icon: const Icon(
                                       Icons.delete,
-                                      color: Colors.black87,
+                                      color: Colors.white,
                                     ),
                                     onPressed: () {
                                       _alertService.openModal(
