@@ -7,6 +7,7 @@ class FirebaseService {
   late CollectionReference response;
   late CollectionReference userResponse;
   late CollectionReference targetResponse;
+  late CollectionReference caseResponse;
   User? loginUser;
   static late LocalStorageService localStorageService;
 
@@ -21,6 +22,8 @@ class FirebaseService {
         FirebaseFirestore.instance.collection(DbConstants.UserTable);
     _instance.targetResponse =
         FirebaseFirestore.instance.collection(DbConstants.TargetTable);
+    _instance.caseResponse =
+        FirebaseFirestore.instance.collection(DbConstants.CaseTable);
     localStorageService = LocalStorageService();
     return _instance;
   }
@@ -199,6 +202,33 @@ class FirebaseService {
   Future<bool> deleteTarget(String id) async {
     try {
       await targetResponse.doc(id).delete();
+      print('Silme İşlemi Başarılı');
+      return true;
+    } catch (error) {
+      print('Silme İşlemi Başarısız : $error');
+      return false;
+    }
+  }
+
+  Future<bool> addCase(String name, num amount) async {
+    try {
+      await caseResponse.add({
+        'name': name,
+        'amount': amount,
+        'userId': currentUser!.id,
+        'date': DateTime.now().microsecondsSinceEpoch
+      });
+      print('Kayıt Ekleme Başarılı');
+      return true;
+    } catch (error) {
+      print('Kayıt Eklenemedi : $error');
+      return false;
+    }
+  }
+
+  Future<bool> deleteCase(String id) async {
+    try {
+      await caseResponse.doc(id).delete();
       print('Silme İşlemi Başarılı');
       return true;
     } catch (error) {

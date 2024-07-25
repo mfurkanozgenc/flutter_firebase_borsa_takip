@@ -1,5 +1,13 @@
-2024/07/25-16:55:28.584 1d54 Reusing MANIFEST C:\Users\ZBook\AppData\Local\Temp\flutter_tools.73a75887\flutter_tools_chrome_device.877286c2\Default\Site Characteristics Database/MANIFEST-000001
-2024/07/25-16:55:28.587 1d54 Recovering log #6
-2024/07/25-16:55:28.587 1d54 Reusing old log C:\Users\ZBook\AppData\Local\Temp\flutter_tools.73a75887\flutter_tools_chrome_device.877286c2\Default\Site Characteristics Database/000006.log 
-2024/07/25-16:55:28.588 1d54 Delete type=0 #3
-2024/07/25-16:55:28.588 1d54 Delete type=2 #4
+2024/07/25-20:26:39.266 170c Reusing MANIFEST C:\Users\MUSTAF~1\AppData\Local\Temp\flutter_tools.76e996db\flutter_tools_chrome_device.834cedf3\Default\Site Characteristics Database/MANIFEST-000001
+2024/07/25-20:26:39.271 170c Recovering log #3
+2024/07/25-20:26:39.272 170c Level-0 table #14: started
+2024/07/25-20:26:39.277 170c Level-0 table #14: 1448 bytes OK
+2024/07/25-20:26:39.278 170c Recovering log #7
+2024/07/25-20:26:39.278 170c Level-0 table #15: started
+2024/07/25-20:26:39.281 170c Level-0 table #15: 206 bytes OK
+2024/07/25-20:26:39.281 170c Recovering log #11
+2024/07/25-20:26:39.282 170c Reusing old log C:\Users\MUSTAF~1\AppData\Local\Temp\flutter_tools.76e996db\flutter_tools_chrome_device.834cedf3\Default\Site Characteristics Database/000011.log 
+2024/07/25-20:26:39.284 170c Delete type=2 #3
+2024/07/25-20:26:39.284 170c Delete type=0 #3
+2024/07/25-20:26:39.284 170c Delete type=2 #4
+2024/07/25-20:26:39.284 170c Delete type=0 #7

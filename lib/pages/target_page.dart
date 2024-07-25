@@ -134,12 +134,9 @@ class _TargetPageState extends State<TargetPage> {
                                     activeColor: Colors.white,
                                     checkColor: ColorConstants.generalColor,
                                     onChanged: (bool? value) {
-                                      setState(() async {
-                                        status = value!;
-                                        await _firebaseService
-                                            .updateTargetStatus(
-                                                documentSnapshot, status);
-                                      });
+                                      status = value!;
+                                      _firebaseService.updateTargetStatus(
+                                          documentSnapshot, status);
                                     },
                                   ),
                                 ),

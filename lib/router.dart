@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:project/pages/case_page.dart';
 import 'package:project/pages/create_page.dart';
 import 'package:project/pages/login_page.dart';
 import 'package:project/pages/portfoy_page.dart';
@@ -8,7 +9,6 @@ import 'package:project/pages/update_user_page.dart';
 final GoRouter router = GoRouter(
   routes: [
     GoRoute(
-      
       path: '/loginPage',
       name: 'Login',
       builder: (context, state) => const LoginPage(),
@@ -32,6 +32,11 @@ final GoRouter router = GoRouter(
       path: '/targetPage',
       name: 'Target',
       builder: (context, state) => const TargetPage(),
+    ),
+    GoRoute(
+      path: '/casePage',
+      name: 'Case',
+      builder: (context, state) => const CasePage(),
     ),
   ],
   errorBuilder: (context, state) => const LoginPage(),
