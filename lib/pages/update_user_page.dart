@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:project/constants/colors_constants.dart';
 import 'package:project/constants/db_constants.dart';
+import 'package:project/public_pages/customAppBar.dart';
 import 'package:project/public_pages/footer.dart';
 import 'package:project/services/alert_service.dart';
 import 'package:project/services/firebase_service.dart';
@@ -73,41 +74,41 @@ class _UpdateUserPageState extends State<UpdateUserPage> {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(
+      appBar: CustomAppBar(
+        title: 'Hesabım',
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_back,
-            color: ColorConstants.generalColor,
+            color: Colors.white,
           ),
           onPressed: () {
             context.go('/portfoyPage');
           },
         ),
-        title: const Text(
-          'Hesabım',
-          style: TextStyle(color: ColorConstants.generalColor),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.white,
+        titleColor: Colors.white,
+        backgroundColor: ColorConstants.generalColor,
       ),
       body: Column(
         children: [
-          Container(
-            height: height * .4,
-            width: width,
-            color: ColorConstants.generalColor,
-            child: const Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Bilgilerinizi Güncelleyin',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.center,
-                ),
-              ],
+          Padding(
+            padding: const EdgeInsets.only(top: 0.5),
+            child: Container(
+              height: height * .4,
+              width: width,
+              color: Colors.transparent,
+              child: const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Bilgilerinizi Güncelleyin',
+                    style: TextStyle(
+                        color: ColorConstants.generalColor,
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
             ),
           ),
           Expanded(

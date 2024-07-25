@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:project/constants/colors_constants.dart';
 import 'package:project/constants/db_constants.dart';
+import 'package:project/public_pages/customAppBar.dart';
 import 'package:project/public_pages/navbar.dart';
 import 'package:project/services/alert_service.dart';
 import 'package:project/services/firebase_service.dart';
@@ -55,10 +56,10 @@ class _PortfoyPageState extends State<PortfoyPage> {
     final currentUserId = currentUser != null ? currentUser!.id : '';
     return Scaffold(
         drawer: const Navbar(),
-        appBar: AppBar(
-          title: const Text('Portföy'),
-          centerTitle: true,
+        appBar: CustomAppBar(
           backgroundColor: ColorConstants.generalColor,
+          titleColor: Colors.white,
+          title: 'Portöy',
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 20),

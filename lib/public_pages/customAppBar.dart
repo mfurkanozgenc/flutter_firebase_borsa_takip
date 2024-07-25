@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:project/constants/colors_constants.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final Color backgroundColor;
-  final Color iconColor;
-  final VoidCallback onBackPressed;
+  final Color titleColor;
   final List<Widget>? actions;
   final Widget? leading;
 
   const CustomAppBar(
-      {Key? key,
+      {super.key,
       required this.title,
+      this.titleColor = ColorConstants.generalColor,
       this.backgroundColor = Colors.white,
-      this.iconColor = Colors.black,
-      required this.onBackPressed,
       this.actions,
-      this.leading})
-      : super(key: key);
+      this.leading});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +22,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: leading,
       title: Text(
         title,
-        style: TextStyle(color: iconColor),
+        style: TextStyle(color: titleColor),
       ),
       centerTitle: true,
       backgroundColor: backgroundColor,
@@ -33,5 +31,5 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(50);
 }

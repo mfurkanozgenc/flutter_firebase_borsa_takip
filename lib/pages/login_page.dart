@@ -71,7 +71,6 @@ class _LoginPageState extends State<LoginPage> {
     var width = MediaQuery.of(context).size.width;
     var heigth = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: CustomAppBar(title: 'Deneme', onBackPressed: () {}),
       body: Column(
         children: [
           Container(
