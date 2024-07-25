@@ -162,13 +162,15 @@ class FirebaseService {
     loginUser = null;
   }
 
-  Future<String?> createTarget(String target, String targetTime) async {
+  Future<String?> createTarget(
+      String target, String targetTime, DateTime date) async {
     try {
       await targetResponse.add({
         'name': target,
         'note': targetTime,
         'userId': currentUser!.id,
-        'status': false
+        'status': false,
+        'date': date.microsecondsSinceEpoch
       });
       return 'success';
     } catch (error) {
@@ -183,7 +185,8 @@ class FirebaseService {
         'name': data['name'],
         'note': data['note'],
         'userId': data['userId'],
-        'status': status
+        'status': status,
+        'date': data['date']
       });
       return 'success';
     } catch (error) {

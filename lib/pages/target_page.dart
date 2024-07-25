@@ -1,6 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:project/constants/colors_constants.dart';
 import 'package:project/constants/db_constants.dart';
@@ -88,8 +89,12 @@ class _TargetPageState extends State<TargetPage> {
           stream: FirebaseFirestore.instance
               .collection(DbConstants.TargetTable)
               .where('userId', isEqualTo: currentUserId)
+              .orderBy('date')
               .snapshots(),
           builder: (context, snapshots) {
+            if (snapshots.hasError) {
+              return Center(child: Text('Error: ${snapshots.error}'));
+            }
             if (!snapshots.hasData) {
               return const Center(child: CircularProgressIndicator());
             }
@@ -149,16 +154,21 @@ class _TargetPageState extends State<TargetPage> {
                                           fontWeight: FontWeight.bold,
                                           fontSize: 20),
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(5),
-                                      child: Text(
-                                        documentSnapshot['note'],
-                                        style: const TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 15),
-                                      ),
-                                    ),
+                                    documentSnapshot['note']
+                                            .toString()
+                                            .isNotEmpty
+                                        ? Padding(
+                                            padding: const EdgeInsets.all(5),
+                                            child: Text(
+                                              documentSnapshot['note'],
+                                              style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 15),
+                                            ),
+                                          )
+                                        : const Padding(
+                                            padding: EdgeInsets.all(1)),
                                   ],
                                 ),
                               ),
@@ -176,7 +186,7 @@ class _TargetPageState extends State<TargetPage> {
                                           () => deleteTarget(documentId),
                                           DialogType.warning,
                                           'Dikkat !',
-                                          'Hedefi Silmek İstediğinize Emin Misiniz ?',
+                                          'Seçili Hedef Silinecektir.Onaylıyor musunuz ?',
                                           'İptal',
                                           'Sil');
                                     },
@@ -213,67 +223,77 @@ class _TargetPageState extends State<TargetPage> {
             ],
           ),
           content: SingleChildScrollView(
-            child: Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextFormField(
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Lütfen Hedef Giriniz';
-                        }
-                      },
-                      controller: _name,
-                      decoration: const InputDecoration(
-                          label: Text('Hedef *'),
-                          labelStyle: TextStyle(color: Colors.black),
-                          border: OutlineInputBorder(),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              borderSide: BorderSide(color: Colors.grey)),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              borderSide: BorderSide(color: Colors.black)),
-                          errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: ColorConstants.generalColor),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)))),
+            child: Container(
+              width: MediaQuery.sizeOf(context).width * .4,
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Lütfen Hedef Giriniz';
+                          }
+                          if (value.length > 50) {
+                            return 'En Fazla 50 karakter girilebilir';
+                          }
+                        },
+                        inputFormatters: [LengthLimitingTextInputFormatter(50)],
+                        controller: _name,
+                        decoration: const InputDecoration(
+                            label: Text('Hedef *'),
+                            labelStyle: TextStyle(color: Colors.black),
+                            border: OutlineInputBorder(),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                                borderSide: BorderSide(color: Colors.grey)),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                                borderSide: BorderSide(color: Colors.black)),
+                            errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: ColorConstants.generalColor),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)))),
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextFormField(
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Lütfen Hedef Tarihi Veya Not Giriniz';
-                        }
-                      },
-                      controller: _note,
-                      decoration: const InputDecoration(
-                          label: Text('Bitiş Tarihi Veya Not*'),
-                          labelStyle: TextStyle(color: Colors.black),
-                          border: OutlineInputBorder(),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              borderSide: BorderSide(color: Colors.grey)),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              borderSide: BorderSide(color: Colors.black)),
-                          errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: ColorConstants.generalColor),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)))),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                        controller: _note,
+                        validator: (value) {
+                          if (value != null &&
+                              value.isNotEmpty &&
+                              value.length > 50) {
+                            return 'En Fazla 50 karakter girilebilir';
+                          }
+                        },
+                        inputFormatters: [LengthLimitingTextInputFormatter(50)],
+                        decoration: const InputDecoration(
+                            label: Text('Hedef Not'),
+                            labelStyle: TextStyle(color: Colors.black),
+                            border: OutlineInputBorder(),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                                borderSide: BorderSide(color: Colors.grey)),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                                borderSide: BorderSide(color: Colors.black)),
+                            errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: ColorConstants.generalColor),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)))),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
@@ -304,7 +324,7 @@ class _TargetPageState extends State<TargetPage> {
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     var result = await _firebaseService.createTarget(
-                        _name.text, _note.text);
+                        _name.text, _note.text, DateTime.now());
                     if (result!.isNotEmpty && result == 'success') {
                       clearTexts();
                       Navigator.pop(context);

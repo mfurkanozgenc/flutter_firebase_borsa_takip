@@ -177,156 +177,163 @@ class _PortfoyPageState extends State<PortfoyPage> {
             ],
           ),
           content: SingleChildScrollView(
-            child: Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextFormField(
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Lütfen İsim Giriniz';
-                        }
-                      },
-                      controller: _name,
-                      decoration: const InputDecoration(
-                          label: Text('İsim *'),
-                          labelStyle: TextStyle(color: Colors.black),
-                          border: OutlineInputBorder(),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              borderSide: BorderSide(color: Colors.grey)),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              borderSide: BorderSide(color: Colors.black)),
-                          errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: ColorConstants.generalColor),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)))),
+            child: Container(
+              width: MediaQuery.sizeOf(context).width * .4,
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Lütfen İsim Giriniz';
+                          }
+                        },
+                        inputFormatters: [LengthLimitingTextInputFormatter(50)],
+                        controller: _name,
+                        decoration: const InputDecoration(
+                            label: Text('İsim *'),
+                            labelStyle: TextStyle(color: Colors.black),
+                            border: OutlineInputBorder(),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                                borderSide: BorderSide(color: Colors.grey)),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                                borderSide: BorderSide(color: Colors.black)),
+                            errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: ColorConstants.generalColor),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)))),
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextFormField(
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Lütfen Adet Giriniz';
-                        }
-                      },
-                      controller: _quantity,
-                      keyboardType:
-                          const TextInputType.numberWithOptions(decimal: true),
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.allow(
-                            RegExp(r'[0-9]+[,.]{0,1}[0-9]*')),
-                        TextInputFormatter.withFunction(
-                          (oldValue, newValue) => newValue.copyWith(
-                            text: newValue.text.replaceAll(',', '.'),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Lütfen Adet Giriniz';
+                          }
+                        },
+                        controller: _quantity,
+                        keyboardType: const TextInputType.numberWithOptions(
+                            decimal: true),
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.allow(
+                              RegExp(r'[0-9]+[,.]{0,1}[0-9]*')),
+                          TextInputFormatter.withFunction(
+                            (oldValue, newValue) => newValue.copyWith(
+                              text: newValue.text.replaceAll(',', '.'),
+                            ),
                           ),
-                        ),
-                      ],
-                      decoration: const InputDecoration(
-                          label: Text('Adet *'),
-                          labelStyle: TextStyle(color: Colors.black),
-                          border: OutlineInputBorder(),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              borderSide: BorderSide(color: Colors.grey)),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              borderSide: BorderSide(color: Colors.black)),
-                          errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: ColorConstants.generalColor),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)))),
+                          LengthLimitingTextInputFormatter(15),
+                        ],
+                        decoration: const InputDecoration(
+                            label: Text('Adet *'),
+                            labelStyle: TextStyle(color: Colors.black),
+                            border: OutlineInputBorder(),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                                borderSide: BorderSide(color: Colors.grey)),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                                borderSide: BorderSide(color: Colors.black)),
+                            errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: ColorConstants.generalColor),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)))),
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextFormField(
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Lütfen Birim Fiyat Giriniz';
-                        }
-                      },
-                      controller: _unitPrice,
-                      keyboardType:
-                          const TextInputType.numberWithOptions(decimal: true),
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.allow(
-                            RegExp(r'[0-9]+[,.]{0,1}[0-9]*')),
-                        TextInputFormatter.withFunction(
-                          (oldValue, newValue) => newValue.copyWith(
-                            text: newValue.text.replaceAll(',', '.'),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Lütfen Birim Fiyat Giriniz';
+                          }
+                        },
+                        controller: _unitPrice,
+                        keyboardType: const TextInputType.numberWithOptions(
+                            decimal: true),
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.allow(
+                              RegExp(r'[0-9]+[,.]{0,1}[0-9]*')),
+                          TextInputFormatter.withFunction(
+                            (oldValue, newValue) => newValue.copyWith(
+                              text: newValue.text.replaceAll(',', '.'),
+                            ),
                           ),
-                        ),
-                      ],
-                      decoration: const InputDecoration(
-                          label: Text('Birim Fiyat *'),
-                          labelStyle: TextStyle(color: Colors.black),
-                          border: OutlineInputBorder(),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              borderSide: BorderSide(color: Colors.grey)),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              borderSide: BorderSide(color: Colors.black)),
-                          errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: ColorConstants.generalColor),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)))),
+                          LengthLimitingTextInputFormatter(15),
+                        ],
+                        decoration: const InputDecoration(
+                            label: Text('Birim Fiyat *'),
+                            labelStyle: TextStyle(color: Colors.black),
+                            border: OutlineInputBorder(),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                                borderSide: BorderSide(color: Colors.grey)),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                                borderSide: BorderSide(color: Colors.black)),
+                            errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: ColorConstants.generalColor),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)))),
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextFormField(
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Lütfen Hedef Fiyat Giriniz';
-                        }
-                      },
-                      controller: _targetPrice,
-                      keyboardType:
-                          const TextInputType.numberWithOptions(decimal: true),
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.allow(
-                            RegExp(r'[0-9]+[,.]{0,1}[0-9]*')),
-                        TextInputFormatter.withFunction(
-                          (oldValue, newValue) => newValue.copyWith(
-                            text: newValue.text.replaceAll(',', '.'),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Lütfen Hedef Fiyat Giriniz';
+                          }
+                        },
+                        controller: _targetPrice,
+                        keyboardType: const TextInputType.numberWithOptions(
+                            decimal: true),
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.allow(
+                              RegExp(r'[0-9]+[,.]{0,1}[0-9]*')),
+                          TextInputFormatter.withFunction(
+                            (oldValue, newValue) => newValue.copyWith(
+                              text: newValue.text.replaceAll(',', '.'),
+                            ),
                           ),
-                        ),
-                      ],
-                      decoration: const InputDecoration(
-                          label: Text('Hedef Fiyat *'),
-                          labelStyle: TextStyle(color: Colors.black),
-                          border: OutlineInputBorder(),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              borderSide: BorderSide(color: Colors.grey)),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              borderSide: BorderSide(color: Colors.black)),
-                          errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: ColorConstants.generalColor),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)))),
+                          LengthLimitingTextInputFormatter(15),
+                        ],
+                        decoration: const InputDecoration(
+                            label: Text('Hedef Fiyat *'),
+                            labelStyle: TextStyle(color: Colors.black),
+                            border: OutlineInputBorder(),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                                borderSide: BorderSide(color: Colors.grey)),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                                borderSide: BorderSide(color: Colors.black)),
+                            errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: ColorConstants.generalColor),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)))),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

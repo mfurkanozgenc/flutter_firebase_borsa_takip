@@ -1274,8 +1274,10 @@ file:///C:/Users/ZBook/Desktop/borsa/flutter_firebase_borsa_takip/lib/main.dart
 file:///C:/Users/ZBook/Desktop/borsa/flutter_firebase_borsa_takip/lib/pages/create_page.dart
 file:///C:/Users/ZBook/Desktop/borsa/flutter_firebase_borsa_takip/lib/pages/login_page.dart
 file:///C:/Users/ZBook/Desktop/borsa/flutter_firebase_borsa_takip/lib/pages/portfoy_page.dart
+file:///C:/Users/ZBook/Desktop/borsa/flutter_firebase_borsa_takip/lib/pages/target_page.dart
 file:///C:/Users/ZBook/Desktop/borsa/flutter_firebase_borsa_takip/lib/pages/update_user_page.dart
 file:///C:/Users/ZBook/Desktop/borsa/flutter_firebase_borsa_takip/lib/public_pages/footer.dart
+file:///C:/Users/ZBook/Desktop/borsa/flutter_firebase_borsa_takip/lib/public_pages/navbar.dart
 file:///C:/Users/ZBook/Desktop/borsa/flutter_firebase_borsa_takip/lib/router.dart
 file:///C:/Users/ZBook/Desktop/borsa/flutter_firebase_borsa_takip/lib/services/alert_service.dart
 file:///C:/Users/ZBook/Desktop/borsa/flutter_firebase_borsa_takip/lib/services/database_service.dart

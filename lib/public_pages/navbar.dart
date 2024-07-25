@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:project/constants/colors_constants.dart';
 import 'package:project/constants/db_constants.dart';
-import 'package:project/pages/create_page.dart';
-import 'package:project/pages/login_page.dart';
+import 'package:project/public_pages/footer.dart';
 import 'package:project/services/alert_service.dart';
-import 'package:project/services/database_service.dart';
 import 'package:project/services/firebase_service.dart';
 import 'package:project/services/localStorage_service.dart';
 
@@ -24,6 +22,9 @@ class _NavbarState extends State<Navbar> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topRight: Radius.circular(20), bottomRight: Radius.circular(1))),
       child: Column(
         children: [
           Expanded(
@@ -35,23 +36,26 @@ class _NavbarState extends State<Navbar> {
                       decoration: const BoxDecoration(
                         color: ColorConstants.generalColor,
                       ),
-                      accountEmail: const Align(
+                      accountName: const Align(
                         alignment: Alignment.center,
                         child: Text(
                           '',
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 10),
+                              fontWeight: FontWeight.bold, fontSize: 16),
                           textAlign: TextAlign.center,
                         ),
                       ),
-                      accountName: Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                          _firebaseService.currentUser!.fullName,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
+                      accountEmail: Padding(
+                        padding: const EdgeInsets.only(right: 30),
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            _firebaseService.currentUser!.fullName,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
                           ),
                         ),
                       )),
@@ -63,9 +67,8 @@ class _NavbarState extends State<Navbar> {
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                   ),
                   onTap: () {
-                    Navigator.pop(context); // Drawer'ı kapat
-                    context.goNamed(
-                        'Portfoy'); // İstediğiniz sayfaya yönlendirme yap
+                    Navigator.pop(context);
+                    context.goNamed('Portfoy');
                   },
                 ),
                 ListTile(
@@ -75,9 +78,8 @@ class _NavbarState extends State<Navbar> {
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                   ),
                   onTap: () {
-                    Navigator.pop(context); // Drawer'ı kapat
-                    context.goNamed(
-                        'Target'); // İstediğiniz sayfaya yönlendirme yap
+                    Navigator.pop(context);
+                    context.goNamed('Target');
                   },
                 ),
                 ListTile(
@@ -87,9 +89,8 @@ class _NavbarState extends State<Navbar> {
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                   ),
                   onTap: () {
-                    Navigator.pop(context); // Drawer'ı kapat
-                    context.goNamed(
-                        'UpdateUser'); // İstediğiniz sayfaya yönlendirme yap
+                    Navigator.pop(context);
+                    context.goNamed('UpdateUser');
                   },
                 ),
               ],
