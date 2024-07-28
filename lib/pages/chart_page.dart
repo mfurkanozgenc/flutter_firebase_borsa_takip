@@ -73,6 +73,7 @@ class _ChartPageState extends State<ChartPage> {
           return MapEntry(
             index,
             PieChartSectionData(
+              titleStyle: TextStyle(color: Colors.white, fontSize: 20),
               value: data['quantity'].toDouble(),
               title: data['name'],
               showTitle: true,
@@ -125,6 +126,7 @@ class _ChartPageState extends State<ChartPage> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Card(
+              elevation: 10,
               child: Container(
                 height: 50,
                 width: MediaQuery.sizeOf(context).width,

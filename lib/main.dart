@@ -13,9 +13,7 @@ void main() async {
         options: DefaultFirebaseOptions.currentPlatform);
 
     runApp(const MainApp());
-  } catch (e) {
-    print('HATAAA : $e');
-  }
+  } catch (e) {}
 }
 
 class MainApp extends StatelessWidget {
