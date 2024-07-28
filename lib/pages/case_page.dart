@@ -190,11 +190,11 @@ class _CasePageState extends State<CasePage> {
                             TextInputType.numberWithOptions(decimal: true),
                         inputFormatters: <TextInputFormatter>[
                           FilteringTextInputFormatter.allow(
-                            RegExp(r'^-?\d*(\.\d*)?$'),
+                            RegExp(r'^-?\d*(,\d*)?$'),
                           ),
                           TextInputFormatter.withFunction(
                             (oldValue, newValue) => newValue.copyWith(
-                              text: newValue.text.replaceAll(',', '.'),
+                              text: newValue.text.replaceAll('.', ','),
                             ),
                           ),
                           LengthLimitingTextInputFormatter(15),

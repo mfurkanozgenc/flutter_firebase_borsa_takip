@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:project/pages/case_page.dart';
+import 'package:project/pages/chart_page.dart';
 import 'package:project/pages/create_page.dart';
 import 'package:project/pages/login_page.dart';
 import 'package:project/pages/portfoy_page.dart';
@@ -37,6 +38,11 @@ final GoRouter router = GoRouter(
       path: '/casePage',
       name: 'Case',
       builder: (context, state) => const CasePage(),
+    ),
+    GoRoute(
+      path: '/chartPage',
+      name: 'Chart',
+      builder: (context, state) => const ChartPage(),
     ),
   ],
   errorBuilder: (context, state) => const LoginPage(),

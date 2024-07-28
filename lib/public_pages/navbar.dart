@@ -24,7 +24,7 @@ class _NavbarState extends State<Navbar> {
     return Drawer(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
-            topRight: Radius.circular(20), bottomRight: Radius.circular(20)),
+            topRight: Radius.circular(5), bottomRight: Radius.circular(5)),
       ),
       child: Column(
         children: [
@@ -32,7 +32,7 @@ class _NavbarState extends State<Navbar> {
             child: ListView(
               children: [
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * .20,
+                  height: MediaQuery.of(context).size.height * .15,
                   child: UserAccountsDrawerHeader(
                       decoration: const BoxDecoration(
                         color: ColorConstants.generalColor,
@@ -60,6 +60,17 @@ class _NavbarState extends State<Navbar> {
                           ),
                         ),
                       )),
+                ),
+                ListTile(
+                  leading: const Icon(Icons.bar_chart, color: Colors.black),
+                  title: const Text(
+                    'Grafik',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    context.goNamed('Chart');
+                  },
                 ),
                 ListTile(
                   leading: const Icon(Icons.list, color: Colors.black),

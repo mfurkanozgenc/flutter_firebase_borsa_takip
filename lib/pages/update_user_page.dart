@@ -252,15 +252,19 @@ class _UpdateUserPageState extends State<UpdateUserPage> {
                       },
                       obscureText: true,
                       decoration: const InputDecoration(
-                          labelText: 'Mevcut Şifre',
-                          labelStyle: TextStyle(color: Colors.black),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.grey)),
-                          focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black)),
-                          errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: ColorConstants.generalColor))),
+                        labelText: 'Mevcut Şifre',
+                        labelStyle: TextStyle(color: Colors.black),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.grey)),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black)),
+                        focusedErrorBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: ColorConstants.generalColor)),
+                        errorBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: ColorConstants.generalColor)),
+                      ),
                     ),
                   ),
                   Padding(
@@ -283,6 +287,9 @@ class _UpdateUserPageState extends State<UpdateUserPage> {
                               borderSide: BorderSide(color: Colors.grey)),
                           focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.black)),
+                          focusedErrorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: ColorConstants.generalColor)),
                           errorBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                   color: ColorConstants.generalColor))),
@@ -308,6 +315,9 @@ class _UpdateUserPageState extends State<UpdateUserPage> {
                               borderSide: BorderSide(color: Colors.grey)),
                           focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.black)),
+                          focusedErrorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: ColorConstants.generalColor)),
                           errorBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                   color: ColorConstants.generalColor))),

@@ -18,7 +18,9 @@ dependencies:
   hive_flutter:
   hive:
   go_router:
-
+  fl_chart:
+  syncfusion_flutter_charts:
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
