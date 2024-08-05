@@ -24,7 +24,7 @@ class _NavbarState extends State<Navbar> {
     return Drawer(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
-            topRight: Radius.circular(5), bottomRight: Radius.circular(5)),
+            topRight: Radius.circular(10), bottomRight: Radius.circular(10)),
       ),
       child: Column(
         children: [

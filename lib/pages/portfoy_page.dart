@@ -126,9 +126,14 @@ class _PortfoyPageState extends State<PortfoyPage> {
                   ),
                 ),
                 Container(
+                  height: MediaQuery.sizeOf(context).height * .08,
+                  decoration: const BoxDecoration(
+                      color: Color(0xFFee403c),
+                      borderRadius:
+                          BorderRadius.vertical(top: Radius.circular(10))),
                   width: MediaQuery.of(context).size.width,
-                  color: const Color(0xFFee403c),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                           'Toplam Hisse Sayısı : ${snapshots.data!.docs.length}',
@@ -165,6 +170,8 @@ class _PortfoyPageState extends State<PortfoyPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           title: Column(
             children: [
               Padding(
@@ -180,6 +187,7 @@ class _PortfoyPageState extends State<PortfoyPage> {
           ),
           content: SingleChildScrollView(
             child: Container(
+              color: Colors.transparent,
               width: MediaQuery.sizeOf(context).width * .4,
               child: Form(
                 key: _formKey,
@@ -342,6 +350,9 @@ class _PortfoyPageState extends State<PortfoyPage> {
           actions: [
             TextButton(
                 style: ButtonStyle(
+                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10))),
                   backgroundColor: WidgetStateProperty.all(Colors.grey),
                   minimumSize:
                       WidgetStateProperty.all<Size>(const Size(80, 40)),
@@ -359,6 +370,9 @@ class _PortfoyPageState extends State<PortfoyPage> {
             !isEdit
                 ? TextButton(
                     style: ButtonStyle(
+                        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10))),
                         minimumSize:
                             WidgetStateProperty.all<Size>(const Size(80, 40)),
                         maximumSize:
@@ -380,6 +394,9 @@ class _PortfoyPageState extends State<PortfoyPage> {
                         style: TextStyle(color: Colors.white)))
                 : TextButton(
                     style: ButtonStyle(
+                      shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10))),
                       backgroundColor:
                           WidgetStateProperty.all(ColorConstants.generalColor),
                       minimumSize:
