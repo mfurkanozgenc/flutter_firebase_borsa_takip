@@ -1,2 +1,16 @@
-2024/08/05-09:55:39.947 72dc Creating DB C:\Users\ZBook\AppData\Local\Temp\flutter_tools.57c40c88\flutter_tools_chrome_device.258bb639\Default\Local Storage\leveldb since it was missing.
-2024/08/05-09:55:39.973 72dc Reusing MANIFEST C:\Users\ZBook\AppData\Local\Temp\flutter_tools.57c40c88\flutter_tools_chrome_device.258bb639\Default\Local Storage\leveldb/MANIFEST-000001
+2024/08/05-12:01:07.451 650 Reusing MANIFEST C:\Users\ZBook\AppData\Local\Temp\flutter_tools.a7dfa200\flutter_tools_chrome_device.51bf7887\Default\Local Storage\leveldb/MANIFEST-000001
+2024/08/05-12:01:07.462 650 Recovering log #3
+2024/08/05-12:01:07.463 650 Level-0 table #3: started
+2024/08/05-12:01:07.476 650 Level-0 table #3: 256 bytes OK
+2024/08/05-12:01:07.476 650 Recovering log #4
+2024/08/05-12:01:07.477 650 Level-0 table #4: started
+2024/08/05-12:01:07.488 650 Level-0 table #4: 13737 bytes OK
+2024/08/05-12:01:07.489 650 Recovering log #7
+2024/08/05-12:01:07.497 650 Reusing old log C:\Users\ZBook\AppData\Local\Temp\flutter_tools.a7dfa200\flutter_tools_chrome_device.51bf7887\Default\Local Storage\leveldb/000007.log 
+2024/08/05-12:01:07.504 650 Delete type=0 #3
+2024/08/05-12:01:07.505 650 Delete type=0 #4
+2024/08/05-12:01:07.505 650 Delete type=2 #5
+2024/08/05-12:01:07.505 650 Delete type=2 #8
+2024/08/05-12:01:07.506 650 Delete type=2 #9
+2024/08/05-12:01:07.506 650 Delete type=2 #10
+2024/08/05-12:01:07.506 650 Delete type=2 #11
