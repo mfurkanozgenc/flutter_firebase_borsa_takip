@@ -126,6 +126,8 @@ class _CasePageState extends State<CasePage> {
       context: context,
       builder: (context) {
         return AlertDialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           title: Column(
             children: [
               Padding(
@@ -227,11 +229,12 @@ class _CasePageState extends State<CasePage> {
           actions: [
             TextButton(
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.grey),
-                minimumSize:
-                    MaterialStateProperty.all<Size>(const Size(80, 40)),
-                maximumSize:
-                    MaterialStateProperty.all<Size>(const Size(80, 40)),
+                shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10))),
+                backgroundColor: WidgetStateProperty.all(Colors.grey),
+                minimumSize: WidgetStateProperty.all<Size>(const Size(80, 40)),
+                maximumSize: WidgetStateProperty.all<Size>(const Size(80, 40)),
               ),
               onPressed: () {
                 clearTexts();
@@ -244,12 +247,13 @@ class _CasePageState extends State<CasePage> {
             ),
             TextButton(
               style: ButtonStyle(
-                minimumSize:
-                    MaterialStateProperty.all<Size>(const Size(80, 40)),
-                maximumSize:
-                    MaterialStateProperty.all<Size>(const Size(80, 40)),
+                shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10))),
+                minimumSize: WidgetStateProperty.all<Size>(const Size(80, 40)),
+                maximumSize: WidgetStateProperty.all<Size>(const Size(80, 40)),
                 backgroundColor:
-                    MaterialStateProperty.all(ColorConstants.generalColor),
+                    WidgetStateProperty.all(ColorConstants.generalColor),
               ),
               onPressed: () async {
                 if (_formKey.currentState!.validate()) {

@@ -1,10 +1,11 @@
-2024/08/05-09:55:39.816 3778 Log #3: 52 ops saved to Table #16 OK
-2024/08/05-09:55:39.820 3778 Archiving C:\Users\ZBook\AppData\Local\Temp\flutter_tools.57c40c88\flutter_tools_chrome_device.258bb639\Default\Site Characteristics Database/000003.log: OK
-2024/08/05-09:55:39.820 3778 Table #3: 52 entries OK
-2024/08/05-09:55:39.821 3778 Table #4: 52 entries OK
-2024/08/05-09:55:39.821 3778 Table #12: 4 entries OK
-2024/08/05-09:55:39.821 3778 Table #14: 52 entries OK
-2024/08/05-09:55:39.822 3778 Table #15: 2 entries OK
-2024/08/05-09:55:39.822 3778 Table #16: 52 entries OK
-2024/08/05-09:55:39.829 3778 Archiving C:\Users\ZBook\AppData\Local\Temp\flutter_tools.57c40c88\flutter_tools_chrome_device.258bb639\Default\Site Characteristics Database/MANIFEST-000001: OK
-2024/08/05-09:55:39.836 3778 **** Repaired leveldb C:\Users\ZBook\AppData\Local\Temp\flutter_tools.57c40c88\flutter_tools_chrome_device.258bb639\Default\Site Characteristics Database; recovered 6 files; 6320 bytes. Some data may have been lost. ****
+2024/08/05-09:55:39.841 3778 Reusing MANIFEST C:\Users\ZBook\AppData\Local\Temp\flutter_tools.57c40c88\flutter_tools_chrome_device.258bb639\Default\Site Characteristics Database/MANIFEST-000001
+2024/08/05-09:55:39.842 6c4c Compacting 6@0 + 0@1 files
+2024/08/05-09:55:39.846 6c4c Generated table #19@0: 4 keys, 322 bytes
+2024/08/05-09:55:39.846 6c4c Compacted 6@0 + 0@1 files => 322 bytes
+2024/08/05-09:55:39.848 6c4c compacted to: files[ 0 1 0 0 0 0 0 ]
+2024/08/05-09:55:39.849 6c4c Delete type=2 #3
+2024/08/05-09:55:39.849 6c4c Delete type=2 #4
+2024/08/05-09:55:39.850 6c4c Delete type=2 #12
+2024/08/05-09:55:39.850 6c4c Delete type=2 #14
+2024/08/05-09:55:39.850 6c4c Delete type=2 #15
+2024/08/05-09:55:39.851 6c4c Delete type=2 #16

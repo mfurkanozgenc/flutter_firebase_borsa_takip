@@ -5,6 +5,7 @@ import 'package:project/pages/create_page.dart';
 import 'package:project/pages/login_page.dart';
 import 'package:project/pages/portfoy_page.dart';
 import 'package:project/pages/target_page.dart';
+import 'package:project/pages/temettu_page.dart';
 import 'package:project/pages/update_user_page.dart';
 
 final GoRouter router = GoRouter(
@@ -38,6 +39,11 @@ final GoRouter router = GoRouter(
       path: '/casePage',
       name: 'Case',
       builder: (context, state) => const CasePage(),
+    ),
+    GoRoute(
+      path: '/temettuPage',
+      name: 'Temettu',
+      builder: (context, state) => const TemettuPage(),
     ),
     GoRoute(
       path: '/chartPage',

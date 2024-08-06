@@ -107,6 +107,17 @@ class _NavbarState extends State<Navbar> {
                   },
                 ),
                 ListTile(
+                  leading: const Icon(Icons.money, color: Colors.black),
+                  title: const Text(
+                    'Temettüler',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    context.goNamed('Temettu');
+                  },
+                ),
+                ListTile(
                   leading: const Icon(Icons.settings, color: Colors.black),
                   title: const Text(
                     'Ayarlar',

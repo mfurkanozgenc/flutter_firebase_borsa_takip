@@ -207,6 +207,8 @@ class _TargetPageState extends State<TargetPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           title: const Column(
             children: [
               Padding(
@@ -298,6 +300,9 @@ class _TargetPageState extends State<TargetPage> {
           actions: [
             TextButton(
                 style: ButtonStyle(
+                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10))),
                   backgroundColor: WidgetStateProperty.all(Colors.grey),
                   minimumSize:
                       WidgetStateProperty.all<Size>(const Size(80, 40)),
@@ -313,6 +318,9 @@ class _TargetPageState extends State<TargetPage> {
                 )),
             TextButton(
                 style: ButtonStyle(
+                    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10))),
                     minimumSize:
                         WidgetStateProperty.all<Size>(const Size(80, 40)),
                     maximumSize:
