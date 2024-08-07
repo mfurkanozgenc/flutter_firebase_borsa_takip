@@ -61,6 +61,21 @@ class _NavbarState extends State<Navbar> {
                         ),
                       )),
                 ),
+                _firebaseService.currentUser!.fullName ==
+                        'Mustafa Furkan Özgenç'
+                    ? ListTile(
+                        leading: const Icon(Icons.groups, color: Colors.black),
+                        title: const Text(
+                          'Kullanıcılar',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 15),
+                        ),
+                        onTap: () {
+                          Navigator.pop(context);
+                          context.goNamed('Users');
+                        },
+                      )
+                    : Text(''),
                 ListTile(
                   leading: const Icon(Icons.bar_chart, color: Colors.black),
                   title: const Text(
