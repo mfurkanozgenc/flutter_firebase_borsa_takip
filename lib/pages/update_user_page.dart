@@ -6,6 +6,7 @@ import 'package:project/constants/colors_constants.dart';
 import 'package:project/constants/db_constants.dart';
 import 'package:project/public_pages/customAppBar.dart';
 import 'package:project/public_pages/footer.dart';
+import 'package:project/public_pages/navbar.dart';
 import 'package:project/services/alert_service.dart';
 import 'package:project/services/firebase_service.dart';
 import 'package:project/services/localStorage_service.dart';
@@ -16,7 +17,6 @@ class UpdateUserPage extends StatefulWidget {
   @override
   State<UpdateUserPage> createState() => _UpdateUserPageState();
 }
-
 
 class _UpdateUserPageState extends State<UpdateUserPage> {
   final _fullName = TextEditingController();
@@ -75,17 +75,9 @@ class _UpdateUserPageState extends State<UpdateUserPage> {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: CustomAppBar(
+      drawer: const Navbar(),
+      appBar: const CustomAppBar(
         title: 'Hesabım',
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.white,
-          ),
-          onPressed: () {
-            context.go('/portfoyPage');
-          },
-        ),
         titleColor: Colors.white,
         backgroundColor: ColorConstants.generalColor,
       ),

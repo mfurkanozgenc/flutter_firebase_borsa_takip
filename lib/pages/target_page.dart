@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:project/constants/colors_constants.dart';
 import 'package:project/constants/db_constants.dart';
 import 'package:project/public_pages/customAppBar.dart';
+import 'package:project/public_pages/navbar.dart';
 import 'package:project/services/alert_service.dart';
 import 'package:project/services/firebase_service.dart';
 import 'package:project/services/localStorage_service.dart';
@@ -54,17 +55,9 @@ class _TargetPageState extends State<TargetPage> {
     final currentUser = _firebaseService.currentUser;
     final currentUserId = currentUser != null ? currentUser!.id : '';
     return Scaffold(
+        drawer: const Navbar(),
         appBar: CustomAppBar(
           title: 'Hedefler',
-          leading: IconButton(
-            icon: const Icon(
-              Icons.arrow_back,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              context.go('/portfoyPage');
-            },
-          ),
           backgroundColor: ColorConstants.generalColor,
           titleColor: Colors.white,
           actions: [

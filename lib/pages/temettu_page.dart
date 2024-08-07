@@ -49,6 +49,8 @@ class _TemettuPageState extends State<TemettuPage> {
 
   @override
   Widget build(BuildContext context) {
+    final currentUser = _firebaseService.currentUser;
+    final currentUserId = currentUser != null ? currentUser!.id : '';
     return Scaffold(
       drawer: const Navbar(),
       appBar: CustomAppBar(
@@ -56,7 +58,7 @@ class _TemettuPageState extends State<TemettuPage> {
         titleColor: Colors.white,
         title: 'Temettüler',
         titleDescription:
-            'Sadece ${DateTime.now().year}  Yılna Ait Temettüler Listelenir',
+            'Sadece ${DateTime.now().year} Yılına Ait Temettüler Listelenir',
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 20),
@@ -105,6 +107,7 @@ class _TemettuPageState extends State<TemettuPage> {
           StreamBuilder<QuerySnapshot>(
             stream: FirebaseFirestore.instance
                 .collection('temettus')
+                .where('userId', isEqualTo: currentUserId)
                 .where('year', isEqualTo: _selectedYear)
                 .snapshots(),
             builder:
@@ -122,8 +125,8 @@ class _TemettuPageState extends State<TemettuPage> {
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,
-                        crossAxisSpacing: 4.0,
-                        mainAxisSpacing: 4.0,
+                        crossAxisSpacing: 20.0,
+                        mainAxisSpacing: 20.0,
                       ),
                       itemCount: snapshot.data!.docs.length,
                       itemBuilder: (context, index) {
@@ -140,20 +143,24 @@ class _TemettuPageState extends State<TemettuPage> {
                                       document['name'].toString().toUpperCase(),
                                       style: const TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 16),
+                                          fontSize: 20),
                                       softWrap: true,
                                       overflow: TextOverflow.visible,
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.all(20),
-                                      child: Text("${document['price']} ₺"),
+                                      child: Text(
+                                        "${document['price']} ₺",
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
                                     ),
                                   ],
                                 ),
                               ),
                               Positioned(
-                                right: 0,
-                                top: 0,
+                                right: -8,
+                                top: -8,
                                 child: IconButton(
                                   icon: const Icon(
                                     Icons.close,
@@ -194,22 +201,22 @@ class _TemettuPageState extends State<TemettuPage> {
             decoration: const BoxDecoration(
                 color: ColorConstants.generalColor,
                 borderRadius: BorderRadius.vertical(top: Radius.circular(10))),
-            height: MediaQuery.of(context).size.height * 0.15,
+            height: MediaQuery.of(context).size.height * 0.17,
             width: MediaQuery.of(context).size.width * 0.9,
             child: FutureBuilder<double>(
               future: getTotalPrice(0),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Text("Hata oluştu!");
+                  return const Text('');
                 } else if (snapshot.hasError) {
-                  return const Text("Hata oluştu!");
+                  return const Text('');
                 } else {
                   double totalPrice = snapshot.data ?? 0;
                   return SingleChildScrollView(
                     child: Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(5.0),
+                          padding: const EdgeInsets.all(7.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -225,7 +232,7 @@ class _TemettuPageState extends State<TemettuPage> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(5.0),
+                          padding: const EdgeInsets.all(7.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -241,7 +248,7 @@ class _TemettuPageState extends State<TemettuPage> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(5.0),
+                          padding: const EdgeInsets.all(7.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -257,7 +264,7 @@ class _TemettuPageState extends State<TemettuPage> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(5.0),
+                          padding: const EdgeInsets.all(7.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -286,9 +293,11 @@ class _TemettuPageState extends State<TemettuPage> {
 
   Future<double> getTotalPrice(int? year) async {
     double totalPrice = 0;
-
+    final currentUser = _firebaseService.currentUser;
+    final currentUserId = currentUser != null ? currentUser!.id : '';
     var listNew = FirebaseFirestore.instance
         .collection('temettus')
+        .where('userId', isEqualTo: currentUserId)
         .where('year', isEqualTo: year! > 0 ? year : _selectedYear)
         .snapshots();
     await for (var snapshot in listNew) {
